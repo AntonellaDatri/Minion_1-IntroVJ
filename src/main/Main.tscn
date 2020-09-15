@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/mob/Mob.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://minion_assets/art/black_hole.png" type="Texture" id=3]
+[ext_resource path="res://src/main/Main.gd" type="Script" id=4]
+[ext_resource path="res://src/diamond/Diamond.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/main/hud/HUD.tscn" type="PackedScene" id=6]
+
+[node name="Main" type="Node"]
+script = ExtResource( 4 )
+Mob = ExtResource( 1 )
+Diamond = ExtResource( 5 )
+
+[node name="black_hole" type="Sprite" parent="."]
+position = Vector2( 364.665, 490.661 )
+rotation = -0.727319
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="black_hole2" type="Sprite" parent="."]
+position = Vector2( 336.125, 74.4381 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="black_hole3" type="Sprite" parent="."]
+position = Vector2( 876.024, 490.66 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="black_hole4" type="Sprite" parent="."]
+position = Vector2( 761.86, 293.252 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="black_hole5" type="Sprite" parent="."]
+position = Vector2( 911.701, 98.2222 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="black_hole6" type="Sprite" parent="."]
+position = Vector2( 103.04, 250.441 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="StartPosition" type="Position2D" parent="."]
+position = Vector2( 512, 300 )
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="HUD" parent="." instance=ExtResource( 6 )]
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="point" from="Player" to="." method="counter"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]

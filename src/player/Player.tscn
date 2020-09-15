@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://minion_assets/art/player.png" type="Texture" id=1]
+[ext_resource path="res://src/player/Player.gd" type="Script" id=2]
+[ext_resource path="res://src/player/Sprite.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 27.9401
+
+[node name="Player" type="Area2D" groups=[
+"collector",
+]]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 2.83791
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

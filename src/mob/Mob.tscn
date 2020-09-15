@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://minion_assets/art/mob.png" type="Texture" id=1]
+[ext_resource path="res://src/mob/Mob.gd" type="Script" id=2]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "mob",
+"speed": 5.0
+} ]
+
+[node name="Mob" type="RigidBody2D" groups=[
+"mobs",
+]]
+position = Vector2( 2.33317, 2.91058 )
+mass = 0.00102041
+gravity_scale = 0.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+rotation = 1.5708
+scale = Vector2( 0.2, 0.2 )
+frames = SubResource( 1 )
+animation = "mob"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( -0.128752, 0.0938117 )
+rotation = 1.5708
+scale = Vector2( 0.203546, 0.20313 )
+polygon = PoolVector2Array( 3.6535, -46.8692, 51.2692, 47.7024, 52.1945, 49.7669, 52.1426, 51.875, 50.8245, 53.435, 48.6502, 53.8454, -46.75, 53.875, -49.4004, 53.5946, -51.1863, 52.156, -51.4839, 49.9733, -50.5015, 47.75, -3.04278, -46.8014, -1.68875, -48.3521, 0.24557, -49.3212, 2.28704, -48.4459 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
