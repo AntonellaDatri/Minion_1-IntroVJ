@@ -18,7 +18,6 @@ func _physics_process(delta):
 	velocity += target.normalized() * speed
 	velocity *= friction
 	position += velocity * delta
-	print (position)
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
 
